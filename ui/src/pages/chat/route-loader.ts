@@ -15,7 +15,6 @@ import {
 } from "../../lib/sessions/catalog-key.ts";
 import {
   findUiSessionRow,
-  SESSION_COMPOSER_FOCUS_PARAM,
   SESSION_FACE_PREFERENCE_PARAM,
   SESSION_NAVIGATION_KEY_PARAM,
 } from "../../lib/sessions/route-navigation.ts";
@@ -80,14 +79,6 @@ export type SessionChatRouteData = Omit<
   face?: BoardFace;
   kind?: "session";
 };
-
-export function locationWithoutDraft(location: RouteLocation): RouteLocation {
-  const params = new URLSearchParams(location.search);
-  params.delete("draft");
-  params.delete(SESSION_COMPOSER_FOCUS_PARAM);
-  const search = params.toString();
-  return { ...location, search: search ? `?${search}` : "" };
-}
 
 type SessionReferenceSearch = { agentId: string } & (
   | { kind: "short"; value: string }
